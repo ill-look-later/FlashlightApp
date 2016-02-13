@@ -166,7 +166,7 @@ class ViewController: UIViewController {
     
     // 用户数据
     func loadFlashlightControlData() {
-        var userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = NSUserDefaults.standardUserDefaults()
         if let brightness = userDefaults.objectForKey("brightness") as? Float {
             self.flashlightControl.brightness = brightness
         }
@@ -188,7 +188,7 @@ class ViewController: UIViewController {
         }
     }
     func saveFlashlightControlData() {
-        var userDefaults = NSUserDefaults.standardUserDefaults()
+        let userDefaults = NSUserDefaults.standardUserDefaults()
         userDefaults.setFloat(  self.flashlightControl.brightness,          forKey: "brightness")
         userDefaults.setInteger(self.flashlightControl.glitterFrequency,    forKey: "glitterFrequency")
         userDefaults.setInteger(self.flashlightControl.glitterMode.rawValue,forKey: "glitterMode")
@@ -212,7 +212,7 @@ extension UIView {
     func ex_removeAutoresizing() {
         let superview = self.superview
         self.removeFromSuperview()
-        self.setTranslatesAutoresizingMaskIntoConstraints(true)
+        //self.setTranslatesAutoresizingMaskIntoConstraints(true)
         self.sizeToFit()
         superview?.addSubview(self)
     }
@@ -220,7 +220,7 @@ extension UIView {
 extension UIImage {
     class func imageFromView(view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, true, view.layer.contentsScale);
-        view.layer.renderInContext(UIGraphicsGetCurrentContext())
+        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
         return image;

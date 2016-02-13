@@ -81,14 +81,14 @@ class FlashlightControl: NSObject {
     // 开
     private func myOn() {
         if (self.device != nil) && (self.device!.hasTorch) {
-            self.device?.lockForConfiguration(nil)
-            self.device?.setTorchModeOnWithLevel(self.brightness, error: nil)
+            try! self.device?.lockForConfiguration()
+            try! self.device?.setTorchModeOnWithLevel(self.brightness)
             self.device?.unlockForConfiguration()
         }
     }
     // 关
     private func myOff() {
-        self.device?.lockForConfiguration(nil)
+        try! self.device?.lockForConfiguration()
         if (self.device != nil) && (self.device!.torchMode == .On) {
             self.device?.torchMode = .Off
         }
